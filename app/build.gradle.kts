@@ -3,6 +3,8 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id ("androidx.navigation.safeargs.kotlin")
     id ("kotlin-kapt")
+    id("kotlin-android-extensions")
+
 
 }
 
@@ -56,6 +58,13 @@ dependencies {
     implementation ("androidx.navigation:navigation-fragment-ktx:2.5.3")
     implementation ("androidx.navigation:navigation-ui-ktx:2.5.3")
 
-    implementation ("com.squareup.retrofit2:retrofit:2.6.2")
-    implementation ("com.squareup.retrofit2:converter-gson:2.3.0")
+    //implementation ("com.squareup.retrofit2:retrofit:2.6.2")
+   // implementation ("com.squareup.retrofit2:converter-gson:2.3.0")
+
+    implementation ("com.squareup.retrofit2:retrofit:2.9.0")
+    implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
+
+    implementation ("com.google.dagger:hilt-android:2.40.5")
+    kapt ("com.google.dagger:hilt-android-compiler:2.40.5")
+
 }
