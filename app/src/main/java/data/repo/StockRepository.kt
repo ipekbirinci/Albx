@@ -14,11 +14,8 @@ class StockRepository @Inject constructor(
     private val api : StockApi
 ) {
     val stockLiveData = MutableLiveData<List<Stock>?>()
-    val loadingLiveData = MutableLiveData<Boolean>()
-    val errorMessageLiveData = MutableLiveData<String>()
 
     fun getAllStocks(){
-        loadingLiveData.value = true
         api.getAllStocks().enqueue(object : Callback<StockResponse> {
             override fun onResponse(call: Call<StockResponse>, response: Response<StockResponse>) {
 
@@ -30,13 +27,10 @@ class StockRepository @Inject constructor(
                     stockLiveData.value = null
                 }
 
-                loadingLiveData.value = false
             }
 
             override fun onFailure(call: Call<StockResponse>, t: Throwable) {
-                errorMessageLiveData.value = t.message.orEmpty()
-                loadingLiveData.value = false
-                Log.e("GetAllStocks", t.message.orEmpty())
+                Log.e("Failure", t.message.orEmpty())
             }
         })
     }
