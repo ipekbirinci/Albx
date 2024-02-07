@@ -16,6 +16,7 @@ android {
 
     buildFeatures {
         viewBinding= true
+        dataBinding=true
     }
 
     defaultConfig {
@@ -72,6 +73,8 @@ dependencies {
 
     implementation ("com.google.dagger:hilt-android:2.48")
     kapt ("com.google.dagger:hilt-android-compiler:2.48")
+
+    implementation ("androidx.cardview:cardview:1.0.0")
 
 //    implementation ("com.google.dagger:hilt-android:2.33-beta")
 //    kapt ("com.google.dagger:hilt-android-compiler:2.33-beta")
