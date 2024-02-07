@@ -1,3 +1,26 @@
 <resources>
     <string name="app_name">Albx</string>
+    <string name="market1">Borsa İstanbul</string>
+    <string name="market2">Amerikan Borsası</string>
+    <string name="home_page">Anasayfa</string>
+    <string name="markets_page">Piyasalar</string>
+    <string name="search_page">Keşfet</string>
+    <string name="calender_page">Takvim</string>
+    <string name="profile_page">Profil</string>
+
+    <string name="title1">Günün Öne Çıkanları</string>
+    <string name="market_btn1">En Çok Yükselenler</string>
+    <string name="market_btn2">En Çok Düşenler</string>
+
+    <string name="title2">Haberler</string>
+    <string name="show_all">Tümünü Gör</string>
+    <string name="agenda">Gündem</string>
+    <string name="kap_new">KAP Haberleri</string>
+
+
+
+
+
+
+
 </resources>
