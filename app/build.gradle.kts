@@ -3,7 +3,9 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id ("androidx.navigation.safeargs.kotlin")
     id ("kotlin-kapt")
-    id("kotlin-android-extensions")
+    id ("kotlin-parcelize")
+    id ("dagger.hilt.android.plugin")
+    id("com.google.dagger.hilt.android")
 
 
 }
@@ -68,7 +70,18 @@ dependencies {
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-moshi:2.9.0")
 
-    implementation ("com.google.dagger:hilt-android:2.40.5")
-    kapt ("com.google.dagger:hilt-android-compiler:2.40.5")
+    implementation ("com.google.dagger:hilt-android:2.48")
+    kapt ("com.google.dagger:hilt-android-compiler:2.48")
 
+//    implementation ("com.google.dagger:hilt-android:2.33-beta")
+//    kapt ("com.google.dagger:hilt-android-compiler:2.33-beta")
+//    implementation ("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
+//    kapt ("androidx.hilt:hilt-compiler:1.0.0-beta01")
+//    implementation ("androidx.hilt:hilt-navigation-compose:1.0.0-alpha01")
+
+
+
+}
+kapt {
+    correctErrorTypes= true
 }
