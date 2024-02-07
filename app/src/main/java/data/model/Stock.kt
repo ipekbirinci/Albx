@@ -1,5 +1,7 @@
 package data.model
 
+import java.io.Serial
+
 data class Stock(
     val code: String?,
     val name: String?,
