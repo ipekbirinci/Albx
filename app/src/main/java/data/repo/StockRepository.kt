@@ -11,28 +11,28 @@ import retrofit2.Response
 import javax.inject.Inject
 
 class StockRepository @Inject constructor(
-    private val api : StockApi
+    private val api: StockApi
 ) {
     val stockLiveData = MutableLiveData<List<Stock>?>()
 
-    fun getAllStocks(){
-        api.getAllStocks().enqueue(object : Callback<StockResponse> {
-            override fun onResponse(call: Call<StockResponse>, response: Response<StockResponse>) {
+    fun getAllStocks() {
+        api.getAllStocks().enqueue(object : Callback<List<StockResponse>> {
+            override fun onResponse(call: Call<List<StockResponse>>, response: Response<List<StockResponse>>) {
+                val result = response.body()?.flatMap { it.stocks }
 
-                val result = response.body()?.stocks
-
-                if (result.isNullOrEmpty().not()) {
-                    stockLiveData.value = result
-                } else {
+                if (result.isNullOrEmpty()) {
                     stockLiveData.value = null
+                } else {
+                    stockLiveData.value = result
                 }
-
             }
 
-            override fun onFailure(call: Call<StockResponse>, t: Throwable) {
+            override fun onFailure(call: Call<List<StockResponse>>, t: Throwable) {
                 Log.e("Failure", t.message.orEmpty())
             }
         })
     }
-
 }
+
+
+

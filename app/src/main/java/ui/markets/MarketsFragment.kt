@@ -6,30 +6,78 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.albx.R
+import com.example.albx.databinding.FragmentMarketsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.HiltAndroidApp
+import data.repo.StockRepository
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MarketsFragment : Fragment() {
+class MarketsFragment : Fragment(){
 
-    companion object {
-        fun newInstance() = MarketsFragment()
-    }
 
-    private lateinit var viewModel: MarketsViewModel
+    lateinit var stockRepository: StockRepository
+    var adapter: MarketsAdapter?=null
+    //private val marketAdapter by lazy { MarketsAdapter(this) }
+    private val viewModel by viewModels<MarketsViewModel>()
+    private lateinit var binding: FragmentMarketsBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_markets, container, false)
+        binding = FragmentMarketsBinding.inflate(inflater, container, false)
+
+        adapter = MarketsAdapter(emptyList())
+        binding.recyclerview.adapter = adapter
+        binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
+        observeData()
+        getStocksResponse()
+
+        return binding.root
+
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MarketsViewModel::class.java)
-        // TODO: Use the ViewModel
+ /*   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observeData()
+        getStocksResponse()
+    }*/
+
+    private fun getStocksResponse() {
+        viewModel.viewModelScope.launch {
+            viewModel.getStocks()
+        }
     }
+
+    /* fun observeData(){
+        viewModel.stockLiveData.observe(viewLifecycleOwner)
+         { list ->
+            if (list != null) {
+                adapter.stockList(list)
+            } else {
+
+            }
+        }
+
+    }*/
+
+     fun observeData(){
+        viewModel.stockLiveData.observe(viewLifecycleOwner) { list ->
+            list?.let { // list null değilse çalışır
+                adapter?.stockList = it // adapter'ın stockList değişkenine atama yapılır
+                adapter?.notifyDataSetChanged() // adapter'ı güncellemek için
+            }
+        }
+    }
+
 
 }
+
+

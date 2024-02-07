@@ -9,5 +9,5 @@ import util.constants.Constants
 interface StockApi{
 
     @GET(Constants.BASE_URL)
-    fun getAllStocks(): Call<StockResponse>
+    fun getAllStocks(): Call<List<StockResponse>>
 }
