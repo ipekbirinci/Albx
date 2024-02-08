@@ -87,7 +87,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@color/blue"
                     android:gravity="bottom"
-                    android:text="@string/market1"></Button>
+                    android:text="@string/market2"></Button>
 
             </LinearLayout>
 
@@ -148,6 +148,7 @@
     </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="389dp"
         app:layout_constraintEnd_toEndOf="parent"
