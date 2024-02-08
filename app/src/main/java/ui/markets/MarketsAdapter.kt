@@ -1,5 +1,6 @@
 package ui.markets
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -10,10 +11,11 @@ import com.example.albx.databinding.CardViewBinding
 import data.model.Stock
 
 class MarketsAdapter(
-  var stockList: List<Stock>,
+
 ) : RecyclerView.Adapter<MarketsAdapter.ViewHolder>(){
 
-   private var stockFilterList = stockList.toMutableList()
+    var stockList= ArrayList<Stock> ()
+
 
     class ViewHolder(val binding: CardViewBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -25,25 +27,28 @@ class MarketsAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val currentNote = stockFilterList[position]
+        val currentNote = stockList[position]
+
+        Log.d("eeeeedas",stockList.toString())
 
         holder.binding.price.text=currentNote.price.toString()
         holder.binding.rate.text=currentNote.rate.toString()
         holder.binding.shareCode.text=currentNote.code
         holder.binding.shareName.text=currentNote.name
 
-        //Glide kütüphanesi ile görüntü alma
-        Glide.with(holder.itemView.context)
-            .load(currentNote.icon)
-            .into(holder.binding.shareIcon)
 
+        //Glide kütüphanesi ile görüntü alma
+        Glide.with(holder.itemView)
+            .load("https://png.pngtree.com/png-clipart/20220528/ourmid/pngtree-turkey-flag-with-pole-png-image_4744936.png")
+            .override(80,80)
+            .into(holder.binding.shareIcon)
 
 
 
     }
 
 
-    override fun getItemCount(): Int = stockFilterList.size
+    override fun getItemCount(): Int = stockList.size
 
 
 

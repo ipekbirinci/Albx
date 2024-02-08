@@ -8,6 +8,6 @@ import util.constants.Constants
 
 interface StockApi{
 
-    @GET(Constants.BASE_URL)
-    fun getAllStocks(): Call<List<StockResponse>>
+    @GET("mobile-test/test/")
+    fun getAllStocks(): Call<List<Stock>>
 }

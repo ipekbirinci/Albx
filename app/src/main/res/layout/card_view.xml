@@ -18,7 +18,8 @@
                 android:id="@+id/share_icon"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:scaleType="centerCrop"
+                android:src="@drawable/turkey" />
 
             <LinearLayout
                 android:layout_width="265dp"

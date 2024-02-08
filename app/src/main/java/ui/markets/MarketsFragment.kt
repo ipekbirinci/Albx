@@ -2,6 +2,7 @@ package ui.markets
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -21,9 +22,8 @@ import kotlinx.coroutines.launch
 class MarketsFragment : Fragment(){
 
 
-    lateinit var stockRepository: StockRepository
-    var adapter: MarketsAdapter?=null
-    //private val marketAdapter by lazy { MarketsAdapter(this) }
+
+    private val marketAdapter by lazy { MarketsAdapter() }
     private val viewModel by viewModels<MarketsViewModel>()
     private lateinit var binding: FragmentMarketsBinding
 
@@ -34,17 +34,18 @@ class MarketsFragment : Fragment(){
     ): View? {
         binding = FragmentMarketsBinding.inflate(inflater, container, false)
 
-        adapter = MarketsAdapter(emptyList())
-        binding.recyclerview.adapter = adapter
+
+        binding.recyclerview.adapter = marketAdapter
         binding.recyclerview.layoutManager = LinearLayoutManager(requireContext())
         observeData()
         getStocksResponse()
+
 
         return binding.root
 
     }
 
-    
+
     private fun getStocksResponse() {
         viewModel.viewModelScope.launch {
             viewModel.getStocks()
@@ -55,8 +56,9 @@ class MarketsFragment : Fragment(){
      fun observeData(){
         viewModel.stockLiveData.observe(viewLifecycleOwner) { list ->
             list?.let {
-                adapter?.stockList = it
-                adapter?.notifyDataSetChanged()
+                marketAdapter.stockList.addAll(it)
+                Log.d("asd",it.toString())
+                marketAdapter.notifyDataSetChanged()
             }
         }
     }
