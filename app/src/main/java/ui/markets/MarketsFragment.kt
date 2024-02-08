@@ -44,35 +44,19 @@ class MarketsFragment : Fragment(){
 
     }
 
- /*   override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        observeData()
-        getStocksResponse()
-    }*/
-
+    
     private fun getStocksResponse() {
         viewModel.viewModelScope.launch {
             viewModel.getStocks()
         }
     }
 
-    /* fun observeData(){
-        viewModel.stockLiveData.observe(viewLifecycleOwner)
-         { list ->
-            if (list != null) {
-                adapter.stockList(list)
-            } else {
-
-            }
-        }
-
-    }*/
 
      fun observeData(){
         viewModel.stockLiveData.observe(viewLifecycleOwner) { list ->
-            list?.let { // list null değilse çalışır
-                adapter?.stockList = it // adapter'ın stockList değişkenine atama yapılır
-                adapter?.notifyDataSetChanged() // adapter'ı güncellemek için
+            list?.let {
+                adapter?.stockList = it
+                adapter?.notifyDataSetChanged()
             }
         }
     }
